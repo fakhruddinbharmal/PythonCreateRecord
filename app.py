@@ -51,7 +51,7 @@ class Create(Resource):
         # Parse the arguments into an object
         args = parser.parse_args()
         shelf = get_db()
-        shelf[args['identifier']] = args
+        shelf[args['unique_id']] = args
 
         return {'message': 'Record Created', 'data': args}, 201
     
