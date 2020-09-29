@@ -34,8 +34,26 @@ class GetFilling(Resource):
 
         # If the key does not exist in the data store, return a 404 error.
         if not (identifier in shelf):
-            return {'message': 'Device not found', 'data': {}}, 404
+            return {'message': 'Record not found', 'data': {}}, 404
 
-        return {'message': 'Device found', 'data': shelf[identifier]}, 200
+        return {'message': 'Record found', 'data': shelf[identifier]}, 200
+
+class Create(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('unique_id', required=True)
+        parser.add_argument('link')
+        parser.add_argument('user')
+        parser.add_argument('stockCodes')
+        parser.add_argument('row_id')
+        parser.add_argument('order_id')
+        parser.add_argument('created_date')
+        # Parse the arguments into an object
+        args = parser.parse_args()
+        shelf = get_db()
+        shelf[args['identifier']] = args
+
+        return {'message': 'Record Created', 'data': args}, 201
     
+api.add_resource(Create, '/createfilling')    
 api.add_resource(GetFilling, '/filing/<string:identifier>')
