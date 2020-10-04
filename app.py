@@ -57,6 +57,8 @@ class Create(Resource):
                 parser.add_argument('row_id')
                 parser.add_argument('order_id')
                 parser.add_argument('created_date')
+                parser.add_argument('stockCodes_row_id')
+                parser.add_argument('lang')
                 #Parse the arguments into an object
                 args = parser.parse_args()
                 shelf = get_db()
