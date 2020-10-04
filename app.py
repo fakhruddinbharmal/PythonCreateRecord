@@ -15,7 +15,7 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = shelve.open("AllFillings.db")
+        db = g._database = shelve.open("AllFillings.db",writeback=True)
     return db
 
 @app.teardown_appcontext
